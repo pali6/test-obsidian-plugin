@@ -18,6 +18,25 @@ export default class MyPlugin extends Plugin {
 
 		// This creates an icon in the left ribbon.
 		const ribbonIconEl = this.addRibbonIcon('dice', 'Sample Plugin', (evt: MouseEvent) => {
+			require('electron').shell.openExternal("obsidian://new?vault=pali&file=TestURL");
+			require('electron').shell.openExternal("shortcuts://run-shortcut?name=Test");
+
+			const electron = require("electron");
+			const Notification = electron.remote.Notification;
+			const n = new Notification({
+				title: "Obsidian Reminder",
+				body: "body",
+			});
+			n.on("click", () => {
+				n.close();
+			});
+			n.on("close", () => {
+			});
+			console.log("notif MID");
+			console.log("notif END");
+			n.show();
+			console.log("notif END 2");
+
 			// Called when the user clicks the icon.
 			new Notice('This is a notice!');
 		});
@@ -98,7 +117,7 @@ class SampleModal extends Modal {
 
 	onOpen() {
 		const {contentEl} = this;
-		contentEl.setText('Woah!');
+		contentEl.setText('Woah 2!');
 	}
 
 	onClose() {
